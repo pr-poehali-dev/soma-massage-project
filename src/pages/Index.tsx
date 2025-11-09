@@ -198,6 +198,83 @@ export default function Index() {
         </div>
       </section>
 
+      <section className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-12 animate-fade-in">
+            Отзывы клиентов
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'Мария К.',
+                text: 'После курса висцеральной терапии прошли боли в спине, которые мучили меня годами. Елена — настоящий профессионал с чуткими руками.',
+                rating: 5
+              },
+              {
+                name: 'Дмитрий С.',
+                text: 'Невероятный результат! Не только ушло физическое напряжение, но и эмоциональное состояние стало гораздо лучше. Благодарю!',
+                rating: 5
+              },
+              {
+                name: 'Анна В.',
+                text: 'Сначала была скептически настроена, но после первого сеанса почувствовала легкость. Теперь хожу регулярно. Рекомендую всем!',
+                rating: 5
+              }
+            ].map((review, index) => (
+              <Card 
+                key={index} 
+                className="border-none shadow-xl animate-scale-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="p-8">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Icon key={i} name="Star" size={20} className="text-accent fill-accent" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed mb-4 italic">
+                    "{review.text}"
+                  </p>
+                  <p className="font-semibold text-primary">{review.name}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-muted">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-6 animate-fade-in">
+            Сертификаты и образование
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Постоянное обучение и повышение квалификации — основа моей практики
+          </p>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              'Висцеральная терапия',
+              'Миофасциальный релиз',
+              'Энергетические практики',
+              'Психосоматика'
+            ].map((cert, index) => (
+              <Card 
+                key={index} 
+                className="border-none shadow-lg hover:shadow-xl transition-shadow animate-scale-in overflow-hidden group cursor-pointer"
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <div className="relative h-64 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center">
+                  <Icon name="Award" size={64} className="text-primary/20 group-hover:text-primary/40 transition-colors" />
+                  <div className="absolute bottom-0 left-0 right-0 bg-primary/90 text-primary-foreground p-4">
+                    <p className="text-sm font-medium text-center">{cert}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="contact" className="py-20 px-4">
         <div className="container mx-auto max-w-2xl animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-6">
