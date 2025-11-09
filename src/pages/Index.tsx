@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,6 +10,27 @@ export default function Index() {
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            entry.target.classList.remove('opacity-0');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.scroll-animate').forEach((el) => {
+      el.classList.add('opacity-0');
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,8 +126,8 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="about" className="py-20 px-4 bg-muted">
-        <div className="container mx-auto max-w-4xl animate-fade-in">
+      <section id="about" className="py-20 px-4 bg-muted scroll-animate">
+        <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-12">
             О специалисте
           </h2>
@@ -147,9 +168,9 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="methods" className="py-20 px-4">
+      <section id="methods" className="py-20 px-4 scroll-animate">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-12 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-12">
             Методики
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -192,10 +213,10 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-muted">
+      <section className="py-20 px-4 bg-muted scroll-animate">
         <div className="container mx-auto max-w-5xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
+            <div>
               <h3 className="text-3xl font-bold text-primary mb-6">
                 Что даёт терапия
               </h3>
@@ -214,7 +235,7 @@ export default function Index() {
                 ))}
               </div>
             </div>
-            <div className="relative animate-scale-in">
+            <div className="relative">
               <img 
                 src="/placeholder.svg" 
                 alt="Результаты" 
@@ -225,9 +246,9 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 scroll-animate">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-12 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-12">
             Отзывы клиентов
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -270,9 +291,9 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-muted">
+      <section className="py-20 px-4 bg-muted scroll-animate">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-6 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-6">
             Сертификаты и образование
           </h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -302,8 +323,8 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="contact" className="py-20 px-4">
-        <div className="container mx-auto max-w-2xl animate-fade-in">
+      <section id="contact" className="py-20 px-4 scroll-animate">
+        <div className="container mx-auto max-w-2xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-6">
             Записаться на сеанс
           </h2>
