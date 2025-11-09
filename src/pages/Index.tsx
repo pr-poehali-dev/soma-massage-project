@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function Index() {
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -21,6 +22,7 @@ export default function Index() {
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -42,7 +44,32 @@ export default function Index() {
               Контакты
             </button>
           </div>
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+            className="md:hidden p-2 text-primary"
+            aria-label="Меню"
+          >
+            <Icon name={mobileMenuOpen ? 'X' : 'Menu'} size={24} />
+          </button>
         </nav>
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-background border-t border-border animate-fade-in">
+            <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+              <button onClick={() => scrollToSection('hero')} className="text-left text-foreground hover:text-primary transition-colors py-2">
+                Главная
+              </button>
+              <button onClick={() => scrollToSection('about')} className="text-left text-foreground hover:text-primary transition-colors py-2">
+                О специалисте
+              </button>
+              <button onClick={() => scrollToSection('methods')} className="text-left text-foreground hover:text-primary transition-colors py-2">
+                Методики
+              </button>
+              <button onClick={() => scrollToSection('contact')} className="text-left text-foreground hover:text-primary transition-colors py-2">
+                Контакты
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       <section id="hero" className="pt-32 pb-20 px-4 animate-fade-in">
